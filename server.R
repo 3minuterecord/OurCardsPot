@@ -118,8 +118,11 @@ shinyServer(function(input, output, session) {
       fullWidth = FALSE,
       defaultColDef = colDef(headerStyle = list(background = "#f7f7f8")),
       columns = list(
+        Names = colDef(
+          minWidth = 145
+        ),
         Status = colDef(
-          name = 'Winnings',
+          name = 'Win | Loss',
           style = function(value) {
             if (value == 0) {
               color <- lightTextCol

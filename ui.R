@@ -36,25 +36,25 @@ body <- dashboardBody(
       inputId = 'allPeople', 
       label = 'All', 
       icon = icon("users fa-fw"),
-      width = 100
+      width = 110
     ),
     actionButton(
       inputId = 'billy', 
       label = 'Billy', 
       icon = icon("user-o fa-fw"),
-      width = 100
+      width = 110
     ),
     actionButton(
       inputId = 'brian', 
       label = 'Brian', 
       icon = icon("user-o fa-fw"),
-      width = 100
+      width = 110
     ),
     actionButton(
       inputId = 'browno', 
       label = 'Browno', 
       icon = icon("user-o fa-fw"),
-      width = 100
+      width = 110
     )
   ),
   div(
@@ -62,71 +62,71 @@ body <- dashboardBody(
       inputId = 'doc', 
       label = 'Doc', 
       icon = icon("user-o fa-fw"),
-      width = 100
+      width = 110
     ),
     actionButton(
       inputId = 'jason', 
       label = 'Jason', 
       icon = icon("user-o fa-fw"),
-      width = 100
+      width = 110
     ),
     actionButton(
       inputId = 'matthew', 
       label = 'Matthew', 
       icon = icon("user-o fa-fw"),
-      width = 100
+      width = 110
     ),
     actionButton(
       inputId = 'mossy', 
       label = 'Mossy', 
       icon = icon("user-o fa-fw"),
-      width = 100
+      width = 110
     )
   ), br(),
   div(
     actionButton(
       inputId = 'oneIn', 
       label = '€1', 
-      width = 100
+      width = 110
     ),
     actionButton(
       inputId = 'twoIn', 
       label = '€2', 
-      width = 100
+      width = 110
     ),
     actionButton(
       inputId = 'fiveIn', 
       label = '€5', 
-      width = 100
+      width = 110
     ),
     actionButton(
       inputId = 'tenIn', 
       label = '€10', 
-      width = 100
+      width = 110
     )
   ),
   div(
     actionButton(
       inputId = 'addMoney', 
       label = 'Top Up', 
-      width = 100
+      width = 110
     ),
     actionButton(
       inputId = 'clearNameSelector', 
       label = 'Clear', 
-      width = 100
+      width = 110
     ),
     actionButton(
       inputId = 'placeBet', 
       label = 'Put In', 
       icon = icon("plus fa-fw"),
-      width = 100
+      width = 110
     ),
     actionButton(
       inputId = 'cashOut', 
       label = 'Take Out', 
       icon = icon("minus fa-fw"),
-      width = 100
+      width = 110
     ),
     br(), br(), br(),
   reactableOutput('accountTable'),
