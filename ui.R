@@ -85,18 +85,18 @@ body <- dashboardBody(
   ), br(),
   div(
     actionButton(
-      inputId = 'oneIn', 
-      label = '€1', 
+      inputId = 'allIn', 
+      label = 'All In', 
       width = 110
     ),
     actionButton(
-      inputId = 'twoIn', 
-      label = '€2', 
+      inputId = 'twenIn', 
+      label = 'Min Bet', 
       width = 110
     ),
     actionButton(
-      inputId = 'fiveIn', 
-      label = '€5', 
+      inputId = 'potIn', 
+      label = '€Pot', 
       width = 110
     ),
     actionButton(

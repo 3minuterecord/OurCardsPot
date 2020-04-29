@@ -548,42 +548,40 @@ input {
   padding-top: 6px;
 }
 
-#oneIn{
+#allIn{
   background: #EBCA48;
-  font-size: 14px !important;
+  font-size: 16px !important;
 }
 
-#twoIn{
+#twenIn{
   background: #EBCA48;
-  font-size: 14px !important;
+  font-size: 16px !important;
 }
 
-#fiveIn{
+#potIn{
   background: #EBCA48;
-  font-size: 14px !important;
+  font-size: 16px !important;
 }
 
 #tenIn{
   background: #EBCA48;
-  font-size: 14px !important;
+  font-size: 16px !important;
 }
 
 #addMoney{
-  background: #797976;
-  color: #FFFFFF;
+  background: #F7F7F8;
 }
 
 #clearNameSelector{
-  background: #797976;
-  color: #FFFFFF;
+  background: #F7F7F8;
 }
 
 #placeBet{
-  background: #797976;
+  background: #1ED760;
   color: #FFFFFF;
 }
 
 #cashOut{
-  background: #797976;
+  background: #D35230;
   color: #FFFFFF;
 }

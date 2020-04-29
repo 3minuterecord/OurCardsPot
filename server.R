@@ -2,6 +2,8 @@ source("global.R")
 
 shinyServer(function(input, output, session) {
   
+  ALL_IN <- 1
+  
   usersCashAccounts <- reactiveValues(Names = NULL, Balance = NULL)
   usersTopUps <- reactiveValues(Names = NULL, Balance = NULL)
   
@@ -97,10 +99,12 @@ shinyServer(function(input, output, session) {
       left_join(usersTopUps$Data, by = 'Names') %>%
       mutate(Status = Balance - Added) %>%
       select(Names, Added, Status, Balance) %>%
+      mutate(Status = round(Status, 2)) %>%
+      mutate(Balance = round(Balance, 2)) %>%
       arrange(desc(Status, Names))
     
     lightTextCol <- "#C1C1C1"
-    
+    write.csv(data, paste0("bets/status_", format(Sys.time(), "%Y%m%d%H%M%S"), ".csv"), row.names = FALSE)
     reactable(
       data,
       #defaultSorted = list(Balance = "desc"),
@@ -126,6 +130,8 @@ shinyServer(function(input, output, session) {
           style = function(value) {
             if (value == 0) {
               color <- lightTextCol
+            } else if (value < 0){
+              color <- "#EB272E"
             } else {
               color <- "#333"
             }
@@ -146,6 +152,8 @@ shinyServer(function(input, output, session) {
           style = function(value) {
             if (value == 0) {
               color <- lightTextCol
+            } else if (value < 0){
+              color <- "#EB272E"
             } else {
               color <- "#333"
             }
@@ -362,7 +370,9 @@ shinyServer(function(input, output, session) {
       outputValue <- "---"
     } else {
       outputValue <- thePot$Pot
+      outputValue <- round(outputValue, 2)
     }
+    
     labelIcon <- tags$i(class = "fa fa-money fa-fw")
     labelText = "What's in the pot?"
     div(createInfoBox(outputValue, labelIcon, labelText), class = "combo-box combo-dark")
@@ -384,30 +394,58 @@ shinyServer(function(input, output, session) {
     div(createInfoBox(outputValue, labelIcon, labelText), class = "combo-box combo-light")
   })
   
-  observeEvent(input$oneIn, {
-    updateNumericInput(
+  observeEvent(input$allIn, {
+    cash <- ALL_IN
+    peopleWantingCash <-  players()$Name
+
+    newCash <- data.frame(
+      Names = peopleWantingCash,
+      Add = -1 * cash,
+      stringsAsFactors = FALSE
+    )
+    
+    data <- left_join(usersCashAccounts$Data, newCash, by = 'Names') 
+    data[is.na(data)] <- 0
+    
+    data <- data %>%
+      mutate(Balance = Balance + Add) %>%
+      select(-Add)
+    
+    usersCashAccounts$Data <- data
+    multiplier <- length(players()$Name)
+    
+    if(is.null(thePot$Pot)){
+      data <- cash * multiplier
+    } else {
+      data <- (cash * multiplier) + thePot$Pot  
+    }
+    
+    thePot$Pot <- data
+    
+    updateSelectInput(
       session,
-      inputId = 'moneyToAdd', 
-      label = 'How Much?', 
-      value = 1
+      inputId = 'selectNames', 
+      choices = c("All", players()$Name),
+      selected = NULL,
     )
   })
   
-  observeEvent(input$twoIn, {
+  observeEvent(input$twenIn, {
     updateNumericInput(
       session,
       inputId = 'moneyToAdd', 
       label = 'How Much?', 
-      value = 2
+      value = 0.2
     )
   })
   
-  observeEvent(input$fiveIn, {
+  observeEvent(input$potIn, {
+    val <- thePot$Pot
     updateNumericInput(
       session,
       inputId = 'moneyToAdd', 
       label = 'How Much?', 
-      value = 5
+      value = val
     )
   })
   
